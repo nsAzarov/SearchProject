@@ -1,6 +1,5 @@
 import SearchArea from '../SearchArea'
 import { useState } from 'react'
-import { newData, University } from './data'
 import * as S from './styles'
 import SearchResultsArea from '../SearchResultsArea'
 import FiltersArea from '../FiltersArea'
@@ -36,13 +35,12 @@ const Main = () => {
     setFilters(newArr)
   }
 
-  const [results, setResults] = useState<University[]>([])
+  const [results, setResults] = useState<string[]>([])
   const makeSearch = async () => {
-    const res: University[] = []
-    await newData.forEach((val) => {
-      if (val.name?.includes(query)) res.push(val)
+    const url = 'https://localhost:44302/api/Data?query=' + query;
+    await fetch(url).then(res => res.json()).then(res => {
+      setResults(JSON.parse(res))
     })
-    setResults(res)
   }
 
   return (

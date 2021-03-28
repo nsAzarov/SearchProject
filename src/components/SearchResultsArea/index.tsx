@@ -1,9 +1,8 @@
-import { University } from 'components/Main/data'
 import SearchResult from '../SearchResult'
 import * as S from './styles'
 
 interface Props {
-  results: University[]
+  results: string[]
 }
 
 const SearchResultsArea: React.FC<Props> = (props) => {
@@ -12,7 +11,7 @@ const SearchResultsArea: React.FC<Props> = (props) => {
     <S.SearchResultsArea>
       <S.ScrollableArea>
         {results.map((result) => (
-          <SearchResult key={result.name} result={result} />
+          <SearchResult key={result} result={result} />
         ))}
       </S.ScrollableArea>
     </S.SearchResultsArea>
