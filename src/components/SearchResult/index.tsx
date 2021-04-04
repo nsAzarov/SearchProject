@@ -19,7 +19,7 @@ const SearchResult: React.FC<Props> = (props) => {
     //     }
     //   }}
     // >
-      <S.SearchResult>{result}</S.SearchResult>
+    <S.SearchResult>{result}</S.SearchResult>
     // </Link>
   )
 }

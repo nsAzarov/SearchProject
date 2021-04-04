@@ -11,6 +11,7 @@ export const SearchResult = styled.div`
   margin: 4px;
   padding: 18px 24px;
 
+  text-align: left;
   font-size: 18px;
   color: black;
   cursor: pointer;

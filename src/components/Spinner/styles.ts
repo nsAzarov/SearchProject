@@ -30,7 +30,7 @@ export const Block = styled.div`
     width: 6px;
     height: 18px;
     border-radius: 20%;
-    background: rgb(165, 37, 37);
+    background: #06092b;
   }
 
   &:nth-child(1) {

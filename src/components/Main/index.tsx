@@ -7,6 +7,7 @@ import { Filter } from 'types/Filter'
 
 const Main = () => {
   const [query, setQuery] = useState('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   const [filtersOpen, setFiltersOpen] = useState(false)
   const onDropdownButtonClick = () => setFiltersOpen(!filtersOpen)
@@ -35,26 +36,38 @@ const Main = () => {
     setFilters(newArr)
   }
 
+  const onQueryChange = (val: string) => {
+    setQuery(val)
+    if (val.length >= 3) makeSearch(val)
+    else setResults([])
+  }
+
   const [results, setResults] = useState<string[]>([])
-  const makeSearch = async () => {
-    const url = 'https://localhost:44302/api/Data?query=' + query;
-    await fetch(url).then(res => res.json()).then(res => {
-      setResults(JSON.parse(res))
-    })
+  const makeSearch = async (query?: string) => {
+    setLoading(true)
+    const url = 'https://localhost:44302/api/Data?query=' + query
+    await fetch(url)
+      .then((res) => res.json())
+      .then((res) => {
+        setResults(JSON.parse(res))
+        setLoading(false)
+      })
   }
 
   return (
     <S.Wrapper>
       <SearchArea
         query={query}
-        setQuery={setQuery}
+        setQuery={onQueryChange}
         onDropdownButtonClick={onDropdownButtonClick}
         onSearchButtonClick={makeSearch}
       />
       {filtersOpen && (
         <FiltersArea filters={filters} onFilterChange={onFilterChange} />
       )}
-      {results.length > 0 && <SearchResultsArea results={results} />}
+      {results.length > 0 && (
+        <SearchResultsArea results={results} loading={loading} />
+      )}
     </S.Wrapper>
   )
 }

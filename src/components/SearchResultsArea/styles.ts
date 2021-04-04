@@ -15,6 +15,10 @@ export const SearchResultsArea = styled.div`
   padding: 24px;
 `
 
+export const SpinnerWrapper = styled.div`
+  margin: 155px;
+`;
+
 export const ScrollableArea = styled.div`
   height: 100%;
   width: 100%;
